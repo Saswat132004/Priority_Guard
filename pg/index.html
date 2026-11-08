@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071326" />
+    <title>PriorityGuard | Scheduler simulator</title>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">PG</div><div><h1>PriorityGuard</h1><small>Priority Inversion Detection &amp; Resolution Simulator</small></div></div>
+      <div class="spacer"></div>
+      <div class="header-controls">
+        <label class="visually-hidden" for="sc">Scenario</label><select id="sc" aria-label="Scenario"></select>
+        <label class="visually-hidden" for="pr">Protocol</label><select id="pr" aria-label="Protocol"><option value="NONE">Protocol: None</option><option value="PIP">Protocol: PIP</option><option value="PCP">Protocol: PCP</option></select>
+        <span class="pill status-pill" id="stat"></span><span class="pill mono" id="tm"></span><button id="rs" class="icon-button" title="Reset simulation">&#8634;<span>Reset</span></button>
+      </div>
+    </header>
+    <main>
+      <aside>
+        <div class="panel controls-panel"><div class="panel-heading"><h3>Playback</h3><span class="eyebrow">Simulation controls</span></div><div class="ctl"><button id="run" class="primary">&#9654; Run</button><button id="pause">&#10074;&#10074; Pause</button><button id="step">&#9197; Step</button><button id="rs2">&#8634; Reset</button></div><div class="ctl secondary-controls"><button id="back">&#8630; Back</button><button id="end">&#9197;&#9197; To end</button></div><input id="scrub" type="range" min="0" max="0" value="0" aria-label="Simulation timeline" /><small id="scl" class="step-label"></small><label class="speed-label">Speed <input id="spd" type="range" min="150" max="1200" value="650" aria-label="Playback speed" /></label></div>
+        <div class="panel"><div class="panel-heading"><h3>Protocol</h3></div><div id="pinfo"></div></div>
+        <div class="panel"><div class="panel-heading"><h3>Scenario</h3></div><div id="sinfo" class="muted"></div><div id="cust" class="custom-editor"><textarea id="ctxt" rows="6" spellcheck="false"></textarea><small>One task per line:<br />NAME prio=N arr=N dl=N : c2 L R1 c1 U R1<br />(cN = run N units, L/U = lock/unlock)</small><button id="apply" class="full-width">Apply &amp; reset</button><div id="cerr"></div></div></div>
+        <div class="keyboard-help"><small>Keys: Space run/pause &middot; &larr; &rarr; step &middot; End finish &middot; R reset</small></div>
+      </aside>
+      <section>
+        <div id="viz"></div>
+        <div class="panel timeline-panel"><div class="panel-heading"><h3>Execution timeline</h3><span class="eyebrow">Gantt chart</span></div><div id="gantt"></div><div class="lg muted"><span class="legend-run">&#9632; Running</span><span class="legend-ready">&#9632; Ready</span><span class="legend-blocked">&#9632; Blocked</span><span>&#9632; Finished / idle</span></div></div>
+        <div class="tabs" id="tabs"></div><div class="panel tab-panel" id="tab"></div>
+      </section>
+    </main>
+    <script type="module" src="/src/ui/main.js"></script>
+  </body>
+</html>
